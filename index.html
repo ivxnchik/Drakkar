@@ -150,7 +150,7 @@
   .btn-secondary{
     display:inline-flex; align-items:center; gap:10px;
     background:transparent; color:var(--ice);
-    border:1.5px solid var(--line);
+    border:1px solid var(--line);
     font-weight:700; font-size:17px;
     padding:14px 27px; border-radius:var(--radius);
     transition:border-color .15s, background .15s;
@@ -193,7 +193,7 @@
 
   /* STRIP */
   .strip{ border-bottom:1px solid var(--line); background:var(--navy); }
-  .strip-inner{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; padding:24px 0; }
+  .strip-inner{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; padding-top:24px; padding-bottom:24px; }
   .strip-item{ font-size:14px; color:var(--ice-dim); }
   .strip-item b{ font-family:'Oswald','Arial Narrow',sans-serif; color:var(--ice); font-size:23px; font-weight:600; margin-right:8px; }
 
@@ -301,6 +301,8 @@
   .repair-cta strong{font-size:16px;color:var(--ice);}
   .repair-cta span{font-size:13px;line-height:1.55;color:var(--ice-dim);max-width:56ch;}
   .repair-cta .btn-primary{flex-shrink:0;font-size:14px;padding:12px 18px;}
+  .repair-cta .btn-secondary{flex-shrink:0;font-size:14px;padding:11px 17px;}
+  .repair-cta .actions-row{display:flex;gap:12px;flex-shrink:0;}
 
   /* BACK TO TOP */
   .back-to-top{position:fixed;right:28px;bottom:28px;z-index:55;width:46px;height:46px;border:1px solid rgba(237,243,245,.16);border-radius:50%;background:rgba(15,38,53,.9);color:var(--ice);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.24);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,visibility .2s,transform .2s,background .15s,color .15s;}
@@ -417,8 +419,8 @@
     .section-head{margin-bottom:38px;padding-bottom:22px;gap:18px;}
     .hero-copy{padding-bottom:38px;}
     .hero h1{max-width:18ch;}
-    .strip-inner{padding:20px 0;}
-    .strip-item{width:calc(50% - 10px);}
+    .strip-inner{padding-top:20px;padding-bottom:20px;}
+    .strip-item{width:100%;}
     .model-copy-pro{min-height:0;}
     .reviews-proof{align-items:flex-start;flex-direction:column;gap:14px;padding:22px;}
   }
@@ -439,7 +441,9 @@
     .repair-item .name{font-size:18px;}
     .repair-item .price{font-size:19px;}
     .repair-cta{align-items:stretch;flex-direction:column;gap:16px;margin-top:22px;padding:20px 0;}
+    .repair-cta .actions-row{flex-direction:column;width:100%;}
     .repair-cta .btn-primary{width:100%;}
+    .repair-cta .btn-secondary{width:100%;justify-content:center;}
     .price-note{font-size:15px;line-height:1.65;margin-top:22px;}
     .back-to-top{right:16px;bottom:76px;width:44px;height:44px;}
     .models-note{padding:15px 16px;}
@@ -633,7 +637,7 @@
 
     <div class="repair-cta">
       <div><strong>Не нашли свою проблему?</strong><span>Отправьте фото лодки — подскажем, что с ней делать и сориентируем по стоимости.</span></div>
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <div class="actions-row">
         <a class="btn-primary phone-copy" href="tel:+79789842779" data-phone="+7 978 984-27-79">Позвонить мастеру</a>
         <a class="btn-secondary max-link" href="https://web.max.ru/133198339" target="_blank" rel="noopener">Написать в MAX</a>
       </div>
