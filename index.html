@@ -829,7 +829,7 @@
   const modal=document.getElementById('fleetModal'); if(!modal)return;
   const img=document.getElementById('fleetModalImg'), kicker=document.getElementById('fleetModalKicker'), title=document.getElementById('fleetModalTitle'), text=document.getElementById('fleetModalText'), close=document.getElementById('fleetModalClose');
   const data=(window.DRAKKAR_CONTENT&&window.DRAKKAR_CONTENT.fleet&&window.DRAKKAR_CONTENT.fleet.items)||{};
-  function openModal(key){const item=data[key];if(!item)return;kicker.textContent=item.kicker;title.textContent=item.title;text.textContent=item.text;img.src=item.img;img.alt=item.alt;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';close.focus();}
+  function openModal(key){const item=data[key];if(!item)return;kicker.textContent=item.kicker;title.textContent=item.title;text.textContent=item.text;img.src=item.image;img.alt=item.alt;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';close.focus();}
   function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
   document.querySelectorAll('.fleet-card[data-fleet]').forEach(card=>{
     card.addEventListener('click',e=>{if(e.target.closest('img'))return;openModal(card.dataset.fleet);});
