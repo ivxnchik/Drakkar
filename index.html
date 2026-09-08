@@ -386,6 +386,8 @@
   .reviews-proof-main strong{font-family:'Oswald','Arial Narrow',sans-serif;font-size:38px;color:var(--ice);font-weight:600;}
   .reviews-proof-main span:last-child,.reviews-proof p{color:var(--ice-dim);font-size:14px;}
   .reviews-proof p{max-width:48ch;margin:0;}
+  .reviews-link{display:inline-block;margin-top:14px;color:var(--brass-bright);font-weight:700;text-decoration:none;}
+  .reviews-link:hover{text-decoration:underline;}
   @media(max-width:760px){
     section{padding:76px 0;}
     .wrap{padding-left:20px;padding-right:20px;}
@@ -451,20 +453,48 @@
   .lightbox{
     position:fixed; inset:0; z-index:200; background:rgba(6,14,20,0.94);
     display:none; align-items:center; justify-content:center; padding:32px;
-    backdrop-filter:blur(4px);
+    backdrop-filter:blur(4px); overflow:hidden;
   }
   .lightbox.open{ display:flex; }
+  .lightbox-stage{
+    width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+    overflow:hidden; touch-action:none;
+  }
   .lightbox img{
     max-width:min(92vw, 1100px); max-height:88vh; width:auto; height:auto;
     object-fit:contain; border-radius:var(--radius); box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    transform:translate3d(0,0,0) scale(1); transform-origin:center center;
+    user-select:none; -webkit-user-drag:none; cursor:zoom-in; will-change:transform;
   }
+  .lightbox.is-zoomed img{ cursor:grab; }
+  .lightbox.is-dragging img{ cursor:grabbing; }
   .lightbox-close{
     position:absolute; top:22px; right:26px; width:44px; height:44px;
     border-radius:50%; background:rgba(237,243,245,0.1); color:var(--ice);
     display:flex; align-items:center; justify-content:center; font-size:22px;
-    cursor:pointer; border:1px solid var(--line);
+    cursor:pointer; border:1px solid var(--line); z-index:2;
   }
   .lightbox-close:hover{ background:rgba(237,243,245,0.18); }
+  .lightbox-tools{
+    position:absolute; left:50%; bottom:22px; transform:translateX(-50%); z-index:2;
+    display:flex; align-items:center; gap:8px; padding:7px;
+    border:1px solid var(--line); border-radius:999px; background:rgba(6,14,20,0.72);
+    backdrop-filter:blur(8px);
+  }
+  .lightbox-tool{
+    width:40px; height:40px; border:0; border-radius:50%;
+    background:rgba(237,243,245,0.1); color:var(--ice); font-size:22px;
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .lightbox-tool:hover{ background:rgba(237,243,245,0.18); }
+  .lightbox-hint{ color:var(--ice-dim); font-size:12px; padding:0 8px; white-space:nowrap; }
+  @media (max-width:600px){
+    .lightbox{padding:18px;}
+    .lightbox img{max-width:94vw; max-height:82vh;}
+    .lightbox-close{top:14px;right:14px;}
+    .lightbox-tools{bottom:14px;}
+    .lightbox-hint{display:none;}
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -709,7 +739,10 @@
         <strong>4,8 из 5</strong>
         <span>19 отзывов на Авито</span>
       </div>
-      <p>Отзывы и оценки клиентов — в карточке мастерской на Авито. Перед заказом можно посмотреть реальные впечатления о работе.</p>
+      <div>
+        <p>Отзывы и оценки клиентов — в карточке мастерской на Авито. Перед заказом можно посмотреть реальные впечатления о работе.</p>
+        <a class="reviews-link" href="https://www.avito.ru/sankt-peterburg/predlozheniya_uslug/remont_i_obsluzhivanie_lodok_katerov_sup_dosok_rib_2146189255#open-item-reviews-list" target="_blank" rel="noopener noreferrer">Смотреть отзывы на Авито →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -767,9 +800,17 @@
   </div>
 </div>
 
-<div class="lightbox" id="lightbox">
-  <div class="lightbox-close" id="lightboxClose">✕</div>
-  <img id="lightboxImg" src="" alt="">
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lightbox-close" id="lightboxClose" aria-label="Закрыть">✕</div>
+  <div class="lightbox-stage" id="lightboxStage">
+    <img id="lightboxImg" src="" alt="">
+  </div>
+  <div class="lightbox-tools" aria-label="Управление увеличением">
+    <button class="lightbox-tool" id="lightboxMinus" type="button" aria-label="Уменьшить">−</button>
+    <span class="lightbox-hint">Колесо / жест двумя пальцами</span>
+    <button class="lightbox-tool" id="lightboxReset" type="button" aria-label="Сбросить масштаб">1×</button>
+    <button class="lightbox-tool" id="lightboxPlus" type="button" aria-label="Увеличить">+</button>
+  </div>
 </div>
 
 <div class="phone-toast" id="phoneToast" role="status" aria-live="polite">Номер скопирован в буфер обмена</div>
@@ -861,20 +902,77 @@
   }
 
   var lightbox = document.getElementById('lightbox');
+  var lightboxStage = document.getElementById('lightboxStage');
   var lightboxImg = document.getElementById('lightboxImg');
   var lightboxClose = document.getElementById('lightboxClose');
+  var lightboxPlus = document.getElementById('lightboxPlus');
+  var lightboxMinus = document.getElementById('lightboxMinus');
+  var lightboxReset = document.getElementById('lightboxReset');
+  var zoom = 1, panX = 0, panY = 0, dragging = false, startX = 0, startY = 0;
+  var pinchStart = 0, pinchZoom = 1;
+
+  function clampZoom(v){ return Math.max(1, Math.min(4, v)); }
+  function applyZoom(){
+    lightboxImg.style.transform = 'translate3d(' + panX + 'px,' + panY + 'px,0) scale(' + zoom + ')';
+    lightbox.classList.toggle('is-zoomed', zoom > 1);
+  }
+  function resetZoom(){ zoom=1; panX=0; panY=0; applyZoom(); }
+  function changeZoom(delta){
+    var next=clampZoom(zoom+delta);
+    if(next===1){ resetZoom(); return; }
+    zoom=next;
+    panX*=next/Math.max(zoom-delta,1); panY*=next/Math.max(zoom-delta,1);
+    applyZoom();
+  }
 
   document.querySelectorAll('.zoomable').forEach(function(img){
     img.addEventListener('click', function(){
-      lightboxImg.src = img.src;
+      lightboxImg.src = img.currentSrc || img.src;
       lightboxImg.alt = img.alt;
+      resetZoom();
       lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden','false');
     });
   });
-  function closeLightbox(){ lightbox.classList.remove('open'); lightboxImg.src=''; }
+  function closeLightbox(){ lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden','true'); lightboxImg.src=''; resetZoom(); }
   lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPlus.addEventListener('click', function(){ changeZoom(0.5); });
+  lightboxMinus.addEventListener('click', function(){ changeZoom(-0.5); });
+  lightboxReset.addEventListener('click', resetZoom);
+  lightboxImg.addEventListener('dblclick', function(e){ e.preventDefault(); zoom = zoom > 1 ? 1 : 2; if(zoom===1){panX=0;panY=0;} applyZoom(); });
+  lightboxStage.addEventListener('wheel', function(e){
+    if(!lightbox.classList.contains('open')) return;
+    e.preventDefault(); changeZoom(e.deltaY < 0 ? 0.25 : -0.25);
+  }, {passive:false});
+  lightboxStage.addEventListener('pointerdown', function(e){
+    if(zoom<=1 || e.pointerType==='touch') return;
+    dragging=true; startX=e.clientX-panX; startY=e.clientY-panY; lightbox.classList.add('is-dragging'); lightboxStage.setPointerCapture(e.pointerId);
+  });
+  lightboxStage.addEventListener('pointermove', function(e){
+    if(!dragging) return; panX=e.clientX-startX; panY=e.clientY-startY; applyZoom();
+  });
+  lightboxStage.addEventListener('pointerup', function(){ dragging=false; lightbox.classList.remove('is-dragging'); });
+  lightboxStage.addEventListener('pointercancel', function(){ dragging=false; lightbox.classList.remove('is-dragging'); });
+  lightboxStage.addEventListener('touchstart', function(e){
+    if(e.touches.length===2){
+      pinchStart=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+      pinchZoom=zoom;
+    }
+  }, {passive:true});
+  lightboxStage.addEventListener('touchmove', function(e){
+    if(e.touches.length===2){
+      e.preventDefault();
+      var dist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+      zoom=clampZoom(pinchZoom*(dist/pinchStart));
+      if(zoom===1){panX=0;panY=0;}
+      applyZoom();
+    }
+  }, {passive:false});
   lightbox.addEventListener('click', function(e){ if(e.target === lightbox) closeLightbox(); });
-  window.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLightbox(); });
+  window.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeLightbox();
+    if(lightbox.classList.contains('open')){ if(e.key==='+' || e.key==='=') changeZoom(0.5); if(e.key==='-' || e.key==='_') changeZoom(-0.5); if(e.key==='0') resetZoom(); }
+  });
 })();
 </script>
 <script>
