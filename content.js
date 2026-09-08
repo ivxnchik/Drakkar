@@ -8,6 +8,7 @@
 window.DRAKKAR_CONTENT = {
   phone: '+7 978 984-27-79',
   phoneHref: 'tel:+79789842779',
+  maxUrl: 'https://web.max.ru/133198339',
 
   meta: {
     title: 'Драккар-сервис — ремонт ПВХ-лодок и производство в Санкт-Петербурге',

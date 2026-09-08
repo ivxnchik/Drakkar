@@ -126,13 +126,36 @@
   }
   .call-btn:hover{ background:var(--brass-bright); }
   .call-btn svg{ width:16px; height:16px; }
+  .max-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:transparent;
+    color:var(--ice);
+    border:1px solid var(--line);
+    font-weight:700; font-size:15px;
+    padding:10px 18px;
+    border-radius:var(--radius);
+    transition:border-color .15s, background .15s;
+  }
+  .max-btn:hover{ background:rgba(237,243,245,0.08); border-color:var(--brass-bright); }
+  .max-btn svg{ width:16px; height:16px; }
   @media (max-width:840px){ .nav-links{ display:none; } }
   @media (max-width:640px){
     .header-inner{ height:64px; }
     .logo{ font-size:19px; }
     .call-btn .call-text{ display:none; }
     .call-btn{ padding:10px 12px; }
+    .max-btn .max-text{ display:none; }
+    .max-btn{ padding:10px 12px; }
   }
+  .btn-secondary{
+    display:inline-flex; align-items:center; gap:10px;
+    background:transparent; color:var(--ice);
+    border:1.5px solid var(--line);
+    font-weight:700; font-size:17px;
+    padding:14px 27px; border-radius:var(--radius);
+    transition:border-color .15s, background .15s;
+  }
+  .btn-secondary:hover{ background:rgba(237,243,245,0.08); border-color:var(--brass-bright); }
 
   /* HERO */
   .hero{ position:relative; padding:0; border-bottom:1px solid var(--line); overflow:hidden; }
@@ -442,9 +465,11 @@
   @media (max-width:640px){
     .mobile-call-bar{
       display:flex; position:fixed; bottom:0; left:0; right:0; z-index:60;
-      background:var(--brass); padding:14px 20px; justify-content:center; align-items:center; gap:10px;
-      font-family:'Oswald','Arial Narrow',sans-serif; font-weight:600; font-size:19px; color:var(--navy-deep);
+      background:var(--brass); align-items:stretch;
+      font-family:'Oswald','Arial Narrow',sans-serif; font-weight:600; font-size:17px; color:var(--navy-deep);
     }
+    .mobile-call-bar > a{ flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:14px 10px; }
+    .mobile-call-bar > a.mobile-max{ background:var(--navy-deep); color:var(--ice); font-size:15px; }
     body{ padding-bottom:58px; }
   }
 
@@ -488,6 +513,7 @@
   }
   .lightbox-tool:hover{ background:rgba(237,243,245,0.18); }
   .lightbox-hint{ color:var(--ice-dim); font-size:12px; padding:0 8px; white-space:nowrap; }
+  .lightbox-zoom-level{ font-size:14px; font-weight:700; }
   @media (max-width:600px){
     .lightbox{padding:18px;}
     .lightbox img{max-width:94vw; max-height:82vh;}
@@ -525,6 +551,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.36 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         <span class="call-text">+7 978 984-27-79</span>
       </a>
+      <a class="max-btn" href="https://web.max.ru/133198339" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span class="max-text">Написать в MAX</span>
+      </a>
     </nav>
   </div>
 </header>
@@ -543,6 +573,10 @@
           <a class="btn-primary phone-copy" href="tel:+79789842779" data-phone="+7 978 984-27-79">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.36 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             Позвонить мастеру
+          </a>
+          <a class="btn-secondary" href="https://web.max.ru/133198339" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            Написать в MAX
           </a>
           <a class="btn-ghost" href="#services">Смотреть цены на ремонт →</a>
         </div>
@@ -568,15 +602,15 @@
     </div>
     <div class="fleet-grid">
       <div class="fleet-card tall fleet-a" data-fleet="sl300" tabindex="0" role="button" aria-label="Подробнее о Skyline SL-300">
-        <img class="zoomable" src="img/hero-1.webp" alt="Лодка Skyline на закате у моря">
+        <img src="img/hero-1.webp" alt="Лодка Skyline на закате у моря">
         <span class="tag">Skyline SL-300</span>
       </div>
       <div class="fleet-card fleet-b" data-fleet="rib" tabindex="0" role="button" aria-label="Подробнее о RIB-корпусе">
-        <img class="zoomable" src="img/rib-winter1.webp" alt="RIB-лодка с жёстким корпусом">
+        <img src="img/rib-winter1.webp" alt="RIB-лодка с жёстким корпусом">
         <span class="tag">RIB-корпус</span>
       </div>
       <div class="fleet-card fleet-c" data-fleet="attraction" tabindex="0" role="button" aria-label="Подробнее об аттракционах на заказ">
-        <img class="zoomable" src="img/attraction-blue.webp" alt="Водный аттракцион собственного производства">
+        <img src="img/attraction-blue.webp" alt="Водный аттракцион собственного производства">
         <span class="tag">Аттракционы на заказ</span>
       </div>
     </div>
@@ -750,7 +784,10 @@
 <div class="cta-band">
   <div class="wrap cta-inner">
     <h2>Обсудим ремонт или изготовление</h2>
-    <a class="cta-phone phone-copy" href="tel:+79789842779" data-phone="+7 978 984-27-79">+7 978 984-27-79</a>
+    <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; justify-content:center;">
+      <a class="cta-phone phone-copy" href="tel:+79789842779" data-phone="+7 978 984-27-79">+7 978 984-27-79</a>
+      <a class="btn-secondary" href="https://web.max.ru/133198339" target="_blank" rel="noopener">Написать в MAX</a>
+    </div>
   </div>
 </div>
 
@@ -783,11 +820,15 @@
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.36 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
     +7 978 984-27-79
   </a>
+  <a href="https://web.max.ru/133198339" target="_blank" rel="noopener" class="mobile-max">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    MAX
+  </a>
 </div>
 
 <div class="fleet-modal" id="fleetModal" aria-hidden="true">
   <div class="fleet-modal-card" role="dialog" aria-modal="true" aria-labelledby="fleetModalTitle">
-    <div class="fleet-modal-media"><img id="fleetModalImg" src="" alt=""></div>
+    <div class="fleet-modal-media"><img id="fleetModalImg" class="zoomable" src="" alt=""></div>
     <div class="fleet-modal-copy">
       <div class="fleet-modal-kicker" id="fleetModalKicker"></div>
       <h3 id="fleetModalTitle"></h3>
@@ -803,12 +844,12 @@
 <div class="lightbox" id="lightbox" aria-hidden="true">
   <div class="lightbox-close" id="lightboxClose" aria-label="Закрыть">✕</div>
   <div class="lightbox-stage" id="lightboxStage">
-    <img id="lightboxImg" src="" alt="">
+    <img id="lightboxImg" src="" alt="" draggable="false" ondragstart="return false">
   </div>
   <div class="lightbox-tools" aria-label="Управление увеличением">
     <button class="lightbox-tool" id="lightboxMinus" type="button" aria-label="Уменьшить">−</button>
     <span class="lightbox-hint">Колесо / жест двумя пальцами</span>
-    <button class="lightbox-tool" id="lightboxReset" type="button" aria-label="Сбросить масштаб">1×</button>
+    <button class="lightbox-tool lightbox-zoom-level" id="lightboxReset" type="button" aria-label="Сбросить масштаб">1×</button>
     <button class="lightbox-tool" id="lightboxPlus" type="button" aria-label="Увеличить">+</button>
   </div>
 </div>
@@ -874,7 +915,7 @@
   function openModal(key){const item=data[key];if(!item)return;kicker.textContent=item.kicker;title.textContent=item.title;text.textContent=item.text;img.src=item.image;img.alt=item.alt;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';close.focus();}
   function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
   document.querySelectorAll('.fleet-card[data-fleet]').forEach(card=>{
-    card.addEventListener('click',e=>{if(e.target.closest('img'))return;openModal(card.dataset.fleet);});
+    card.addEventListener('click',e=>{openModal(card.dataset.fleet);});
     card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openModal(card.dataset.fleet);}});
   });
   close.addEventListener('click',closeModal); modal.addEventListener('click',e=>{if(e.target===modal)closeModal();}); window.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeModal();});
@@ -915,13 +956,19 @@
   function applyZoom(){
     lightboxImg.style.transform = 'translate3d(' + panX + 'px,' + panY + 'px,0) scale(' + zoom + ')';
     lightbox.classList.toggle('is-zoomed', zoom > 1);
+    if(lightboxReset){
+      var label = (Math.round(zoom*10)/10);
+      lightboxReset.textContent = (label % 1 === 0 ? label.toFixed(0) : label.toFixed(1)) + '×';
+    }
   }
   function resetZoom(){ zoom=1; panX=0; panY=0; applyZoom(); }
   function changeZoom(delta){
+    var prev=zoom;
     var next=clampZoom(zoom+delta);
     if(next===1){ resetZoom(); return; }
     zoom=next;
-    panX*=next/Math.max(zoom-delta,1); panY*=next/Math.max(zoom-delta,1);
+    var scale=zoom/prev;
+    panX*=scale; panY*=scale;
     applyZoom();
   }
 
@@ -936,8 +983,8 @@
   });
   function closeLightbox(){ lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden','true'); lightboxImg.src=''; resetZoom(); }
   lightboxClose.addEventListener('click', closeLightbox);
-  lightboxPlus.addEventListener('click', function(){ changeZoom(0.5); });
-  lightboxMinus.addEventListener('click', function(){ changeZoom(-0.5); });
+  lightboxPlus.addEventListener('click', function(){ changeZoom(1); });
+  lightboxMinus.addEventListener('click', function(){ changeZoom(-1); });
   lightboxReset.addEventListener('click', resetZoom);
   lightboxImg.addEventListener('dblclick', function(e){ e.preventDefault(); zoom = zoom > 1 ? 1 : 2; if(zoom===1){panX=0;panY=0;} applyZoom(); });
   lightboxStage.addEventListener('wheel', function(e){
@@ -946,17 +993,22 @@
   }, {passive:false});
   lightboxStage.addEventListener('pointerdown', function(e){
     if(zoom<=1 || e.pointerType==='touch') return;
+    e.preventDefault();
     dragging=true; startX=e.clientX-panX; startY=e.clientY-panY; lightbox.classList.add('is-dragging'); lightboxStage.setPointerCapture(e.pointerId);
   });
   lightboxStage.addEventListener('pointermove', function(e){
-    if(!dragging) return; panX=e.clientX-startX; panY=e.clientY-startY; applyZoom();
+    if(!dragging) return; e.preventDefault(); panX=e.clientX-startX; panY=e.clientY-startY; applyZoom();
   });
   lightboxStage.addEventListener('pointerup', function(){ dragging=false; lightbox.classList.remove('is-dragging'); });
   lightboxStage.addEventListener('pointercancel', function(){ dragging=false; lightbox.classList.remove('is-dragging'); });
+  lightboxImg.addEventListener('dragstart', function(e){ e.preventDefault(); });
+  var touchPanStartX=0, touchPanStartY=0;
   lightboxStage.addEventListener('touchstart', function(e){
     if(e.touches.length===2){
       pinchStart=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
       pinchZoom=zoom;
+    } else if(e.touches.length===1 && zoom>1){
+      touchPanStartX=e.touches[0].clientX-panX; touchPanStartY=e.touches[0].clientY-panY;
     }
   }, {passive:true});
   lightboxStage.addEventListener('touchmove', function(e){
@@ -965,6 +1017,10 @@
       var dist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
       zoom=clampZoom(pinchZoom*(dist/pinchStart));
       if(zoom===1){panX=0;panY=0;}
+      applyZoom();
+    } else if(e.touches.length===1 && zoom>1){
+      e.preventDefault();
+      panX=e.touches[0].clientX-touchPanStartX; panY=e.touches[0].clientY-touchPanStartY;
       applyZoom();
     }
   }, {passive:false});
