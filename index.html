@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Драккар — ремонт и производство лодок Skyline, Санкт-Петербург</title>
+<title>Драккар-сервис — ремонт и производство ПВХ-изделий в Санкт-Петербурге</title>
 <link rel="preload" href="./fonts/oswald-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="./fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -226,6 +226,10 @@
 
 
   /* REPAIR PRICE CARDS */
+  .repair-list{max-width:760px;margin:8px auto 0;border-top:1px solid var(--line);}
+  .repair-list .repair-item{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 4px;border-bottom:1px solid var(--line);}
+  .repair-list .repair-item .name{font-size:14px;color:var(--ice);}
+  .repair-list .repair-item .price{font-size:14px;color:var(--brass-bright);font-weight:700;white-space:nowrap;}
   .repair-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
   .repair-group{border:1px solid var(--line);background:rgba(255,255,255,.018);padding:22px 22px 18px;border-radius:var(--radius)}
   .repair-group-kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brass-bright);margin-bottom:7px}
@@ -437,7 +441,7 @@
 
 <header>
   <div class="wrap header-inner">
-    <a href="#top" class="logo">Драккар<em>.</em><small>Мастерская Skyline</small></a>
+    <a href="#top" class="logo">Драккар-сервис<em>.</em><small>Ремонт и производство ПВХ</small></a>
     <nav>
       <div class="nav-links">
         <a class="nav-link" href="#services">Ремонт</a>
@@ -460,9 +464,9 @@
     <img class="zoomable" src="img/hero-action.webp" alt="Лодка Skyline SL-360 на ходу">
     <div class="hero-copy">
       <div class="wrap">
-        <p class="hero-eyebrow">Мастерская ПВХ-изделий · Санкт-Петербург · 10 лет опыта</p>
-        <h1>Ремонт лодок и производство ПВХ-изделий Skyline</h1>
-        <p class="lead">Швы, транцы, баллоны, аттракционы, SUP-доски — чиним и строим из ПВХ то, что держит воду. Ремонтируем частные лодки и выпускаем свои — под маркой Skyline.</p>
+        <p class="hero-eyebrow">Драккар-сервис · Санкт-Петербург · более 10 лет опыта</p>
+        <h1>Ремонт лодок и производство ПВХ-изделий</h1>
+        <p class="lead">Швы, транцы, баллоны, аттракционы, SUP-доски — ремонтируем и изготавливаем изделия из ПВХ. Работаем с частными лодками, RIB и делаем изделия под заказ.</p>
         <div class="hero-actions">
           <a class="btn-primary phone-copy" href="tel:+79789842779" data-phone="+7 978 984-27-79">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.36 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -477,7 +481,7 @@
 
 <div class="strip">
   <div class="wrap strip-inner">
-    <div class="strip-item"><b>10 лет</b>ремонтируем и производим ПВХ</div>
+    <div class="strip-item"><b>10+ лет</b>опыта работы с ПВХ</div>
     <div class="strip-item"><b>4,8</b>средняя оценка · 19 отзывов</div>
     <div class="strip-item"><b>СПб + доставка</b>работаем по всей России</div>
     <div class="strip-item"><b>Skyline</b>собственное производство</div>
@@ -487,8 +491,8 @@
 <section id="fleet">
   <div class="wrap">
     <div class="section-head">
-      <h2>Что выходит из мастерской</h2>
-      <p>От небольшой лодки для рыбалки до жёсткого RIB-корпуса и водных аттракционов на заказ.</p>
+      <h2>Что производим</h2>
+      <p>Лодки ПВХ, RIB и водные аттракционы — от готовых моделей до изделий под заказ.</p>
     </div>
     <div class="fleet-grid">
       <div class="fleet-card tall fleet-a" data-fleet="sl300" tabindex="0" role="button" aria-label="Подробнее о Skyline SL-300">
@@ -510,51 +514,16 @@
 <section id="services" style="background:var(--navy); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
   <div class="wrap">
     <div class="section-head">
-      <h2>Ремонт и обслуживание</h2>
-      <p>Цены на самые частые работы. Точную стоимость под вашу лодку называем по телефону за пару минут диагностики.</p>
+      <h2>Ремонт лодок и ПВХ-изделий</h2>
+      <p>Основные работы и ориентировочные цены. Точную стоимость определяем после осмотра.</p>
     </div>
-    <div class="repair-groups">
-      <div class="repair-group">
-        <div class="repair-group-kicker">Небольшие повреждения</div>
-        <h3>Проколы и фурнитура</h3>
-        <p class="repair-group-intro">Когда лодка в целом целая, но есть локальные повреждения или нужна новая деталь.</p>
-        <div class="repair-item">
-          <div><span class="name">Заплатки</span><span class="desc">Проколы и небольшие повреждения ПВХ</span></div>
-          <div class="price">от 500 ₽</div>
-        </div>
-        <div class="repair-item">
-          <div><span class="name">Фурнитура из ПВХ</span><span class="desc">Ручки, крепления, усилители</span></div>
-          <div class="price">от 700 ₽</div>
-        </div>
-      </div>
-
-      <div class="repair-group">
-        <div class="repair-group-kicker">Герметичность</div>
-        <h3>Швы и диагностика</h3>
-        <p class="repair-group-intro">Если лодка травит воздух или вы хотите понять причину проблемы до ремонта.</p>
-        <div class="repair-item">
-          <div><span class="name">Диагностика</span><span class="desc">Осмотр и определение объёма работ</span></div>
-          <div class="price">1 000 ₽</div>
-        </div>
-        <div class="repair-item">
-          <div><span class="name">Ремонт швов</span><span class="desc">Восстановление герметичности шва</span></div>
-          <div class="price">от 3 000 ₽</div>
-        </div>
-      </div>
-
-      <div class="repair-group">
-        <div class="repair-group-kicker">Транец</div>
-        <h3>Восстановление или замена</h3>
-        <p class="repair-group-intro">Для случаев, когда крепление мотора требует ремонта или полной замены.</p>
-        <div class="repair-item">
-          <div><span class="name">Переклейка транца</span><span class="desc">Без полной замены</span></div>
-          <div class="price">8 000 ₽</div>
-        </div>
-        <div class="repair-item">
-          <div><span class="name">Замена транца</span><span class="desc">Установка нового транца</span></div>
-          <div class="price">15 000 ₽</div>
-        </div>
-      </div>
+    <div class="repair-list">
+      <div class="repair-item"><span class="name">Заплатки</span><span class="price">от 500 ₽</span></div>
+      <div class="repair-item"><span class="name">Фурнитура из ПВХ</span><span class="price">от 700 ₽</span></div>
+      <div class="repair-item"><span class="name">Диагностика</span><span class="price">1 000 ₽</span></div>
+      <div class="repair-item"><span class="name">Ремонт швов</span><span class="price">от 3 000 ₽</span></div>
+      <div class="repair-item"><span class="name">Переклейка транца</span><span class="price">8 000 ₽</span></div>
+      <div class="repair-item"><span class="name">Замена транца</span><span class="price">15 000 ₽</span></div>
     </div>
 
     <div class="repair-cta">
@@ -579,8 +548,8 @@
 <section id="production">
   <div class="wrap">
     <div class="section-head">
-      <h2>Как строится лодка Skyline</h2>
-      <p>Баллоны собираются вручную, сваркой и прошивкой силовых элементов — не конвейер, а мастерская полного цикла.</p>
+      <h2>Как строится лодка</h2>
+      <p>Изготавливаем лодки вручную, контролируя сварку, усиления, фурнитуру и герметичность на каждом этапе.</p>
     </div>
     <div class="prod-grid">
       <div class="prod-media">
@@ -616,8 +585,8 @@
 <section id="models" style="background:var(--navy); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
   <div class="wrap">
     <div class="section-head">
-      <h2>Лодки и аттракционы Skyline</h2>
-      <p>Часть модельного ряда, который есть в наличии или собирается под заказ.</p>
+      <h2>Лодки и аттракционы</h2>
+      <p>Готовые модели и изделия, которые изготавливаем под заказ.</p>
     </div>
 
     <div class="models-grid-pro">
@@ -714,7 +683,7 @@
 
 <div class="cta-band">
   <div class="wrap cta-inner">
-    <h2>Готовы обсудить ремонт или заказать лодку Skyline</h2>
+    <h2>Обсудим ремонт или изготовление</h2>
     <a class="cta-phone phone-copy" href="tel:+79789842779" data-phone="+7 978 984-27-79">+7 978 984-27-79</a>
   </div>
 </div>
@@ -722,7 +691,7 @@
 <footer>
   <div class="wrap footer-inner">
     <div class="footer-col">
-      <b>Драккар</b>
+      <b>Драккар-сервис</b>
       Ремонт и производство ПВХ-изделий<br>
       Санкт-Петербург, Красносельский район
     </div>
@@ -738,7 +707,7 @@
     </div>
   </div>
   <div class="wrap footer-bottom">
-    <span>© 2026 Драккар, Санкт-Петербург</span>
+    <span>© 2026 Драккар-сервис, Санкт-Петербург</span>
     <span>Изображения — работы мастерской</span>
   </div>
 </footer>
