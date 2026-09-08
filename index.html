@@ -538,6 +538,9 @@
   "serviceType":["Ремонт ПВХ-лодок","Ремонт RIB","Ремонт SUP-досок","Изготовление ПВХ-лодок","Изготовление водных аттракционов"]
 }
 </script>
+<script>
+if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
+</script>
 </head>
 <body>
 
@@ -861,6 +864,18 @@
 </div>
 
 <div class="phone-toast" id="phoneToast" role="status" aria-live="polite">Номер скопирован в буфер обмена</div>
+<script>
+(function(){
+  // Браузер по умолчанию запоминает и восстанавливает прежнюю позицию
+  // прокрутки при перезагрузке страницы (это и создавало ощущение, что
+  // сайт «сам» открывается на прайс-листе, если до этого страницу
+  // пролистали вниз). Явно возвращаем наверх при обычном открытии сайта.
+  if(!window.location.hash){
+    window.scrollTo(0,0);
+    window.addEventListener('load', function(){ window.scrollTo(0,0); });
+  }
+})();
+</script>
 <button class="back-to-top" id="backToTop" type="button" aria-label="Вернуться наверх" title="Наверх">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 15l7-7 7 7"/><path d="M12 8v11"/></svg>
 </button>
