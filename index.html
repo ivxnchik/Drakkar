@@ -176,6 +176,8 @@
   .hero h1{ font-size:clamp(38px,5.5vw,64px); color:var(--ice); max-width:16ch; margin-bottom:20px; }
   .hero p.lead{ font-size:18px; color:var(--ice-dim); max-width:48ch; margin-bottom:32px; }
   .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; }
+  .hero-request-link{ flex-basis:100%; color:var(--ice-dim); font-size:14px; padding:2px 0 0; border:none; }
+  .hero-request-link:hover{ color:var(--brass-bright); }
   .btn-primary{
     display:inline-flex; align-items:center; gap:10px;
     background:var(--brass); color:var(--navy-deep);
@@ -393,19 +395,35 @@
   .cta-band{ background:linear-gradient(120deg, var(--navy-panel), var(--navy)); }
   .cta-inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:28px; padding:70px 0; }
   .cta-inner h2{ font-size:clamp(30px,3.5vw,40px); max-width:18ch; }
-  .cta-form-wrap{ width:100%; display:flex; flex-direction:column; align-items:center; gap:16px; margin-top:6px; }
-  .cta-form-toggle{ background:none; border:none; color:var(--brass-bright); font-weight:700; font-size:15px; cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
-  .cta-form-toggle:hover{ color:var(--ice); }
-  .cta-form{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; max-width:640px; width:100%; }
-  .cta-form input{
-    flex:1 1 200px; min-width:0; background:var(--navy-deep); border:1px solid var(--line); color:var(--ice);
-    font-size:15px; padding:13px 16px; border-radius:var(--radius); font-family:inherit;
+  .cta-form-wrap{ width:100%; display:flex; flex-direction:column; align-items:center; gap:14px; margin-top:6px; }
+  .cta-form-toggle{
+    background:none; border:none; padding:4px; margin:0; appearance:none; cursor:pointer;
+    font-family:'Manrope',sans-serif; color:var(--ice-dim); font-weight:600; font-size:14px;
+    text-decoration:underline; text-underline-offset:3px;
   }
-  .cta-form input::placeholder{ color:var(--ice-dim); }
-  .cta-form input:focus{ outline:none; border-color:var(--brass-bright); }
-  .cta-form button[type="submit"]{ flex:0 0 auto; }
-  .cta-form-status{ flex-basis:100%; text-align:center; font-size:14px; color:var(--brass-bright); margin:0; min-height:1.2em; }
-  @media(max-width:600px){ .cta-form input, .cta-form button[type="submit"]{ flex:1 1 100%; width:100%; } }
+  .cta-form-toggle:hover{ color:var(--brass-bright); }
+  .cta-form{
+    display:flex; flex-wrap:wrap; gap:14px; justify-content:center; max-width:640px; width:100%;
+    border:1px solid var(--line); background:var(--navy-panel); border-radius:var(--radius); padding:24px;
+  }
+  .cta-form-row{ display:flex; gap:14px; flex-wrap:wrap; width:100%; }
+  .cta-form-field{ width:100%; display:flex; flex-direction:column; gap:6px; text-align:left; }
+  .cta-form-row .cta-form-field{ flex:1 1 200px; width:auto; min-width:0; }
+  .cta-form-field label{ font-family:'Manrope',sans-serif; font-size:12px; font-weight:600; color:var(--ice-dim); letter-spacing:0.02em; }
+  .cta-form-field label .opt{ font-weight:400; opacity:0.7; }
+  .cta-form input, .cta-form textarea{
+    width:100%; background:var(--navy-deep); border:1px solid var(--line); color:var(--ice);
+    font-family:'Manrope',sans-serif; font-size:15px; padding:13px 16px; border-radius:var(--radius);
+  }
+  .cta-form textarea{ resize:vertical; min-height:90px; font-family:'Manrope',sans-serif; }
+  .cta-form input::placeholder, .cta-form textarea::placeholder{ color:var(--ice-dim); font-family:'Manrope',sans-serif; }
+  .cta-form input:focus, .cta-form textarea:focus{ outline:none; border-color:var(--brass-bright); }
+  .cta-form .btn-primary{
+    width:100%; justify-content:center; border:none; cursor:pointer; font-family:'Oswald','Arial Narrow',sans-serif;
+  }
+  .cta-form .btn-primary:disabled{ opacity:0.75; cursor:default; }
+  .cta-form-status{ width:100%; text-align:center; font-size:13px; color:var(--ice-dim); margin:0; min-height:1.2em; }
+  .cta-form-status.is-error{ color:#e88; }
   .cta-phone{
     font-family:'Oswald','Arial Narrow',sans-serif; font-size:31px; font-weight:600; color:var(--navy-deep);
     background:var(--brass);
@@ -601,6 +619,7 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
             Написать в MAX
           </a>
           <a class="btn-ghost" href="#services">Смотреть цены на ремонт →</a>
+          <a class="btn-ghost hero-request-link" href="#ctaBand" id="heroRequestLink">Не готовы звонить? Оставить заявку →</a>
         </div>
       </div>
     </div>
@@ -806,7 +825,7 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
   </div>
 </section>
 
-<div class="cta-band">
+<div class="cta-band" id="ctaBand">
   <div class="wrap cta-inner">
     <h2>Обсудим ремонт или изготовление</h2>
     <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; justify-content:center;">
@@ -819,8 +838,20 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
         <input type="hidden" name="_subject" value="Заявка с сайта Драккар-сервис">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
-        <input type="text" name="Имя" placeholder="Ваше имя" required>
-        <input type="tel" name="Телефон" placeholder="Телефон для связи" required>
+        <div class="cta-form-row">
+          <div class="cta-form-field">
+            <label for="ctaName">Имя</label>
+            <input type="text" id="ctaName" name="Имя" placeholder="Как к вам обращаться" required>
+          </div>
+          <div class="cta-form-field">
+            <label for="ctaPhone">Телефон</label>
+            <input type="tel" id="ctaPhone" name="Телефон" placeholder="Для связи" required>
+          </div>
+        </div>
+        <div class="cta-form-field">
+          <label for="ctaMessage">Опишите проблему или запрос <span class="opt">(необязательно)</span></label>
+          <textarea id="ctaMessage" name="Комментарий" placeholder="Например: течёт баллон, порвался шов, нужна лодка на заказ..."></textarea>
+        </div>
         <button type="submit" class="btn-primary">Отправить заявку</button>
         <p class="cta-form-status" aria-live="polite"></p>
       </form>
@@ -1001,22 +1032,40 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
       submitBtn.disabled = true;
       submitBtn.textContent = 'Отправляем…';
       statusEl.textContent = '';
+      statusEl.classList.remove('is-error');
+
+      var controller = new AbortController();
+      var timeout = setTimeout(function(){ controller.abort(); }, 10000);
+
       fetch(actionUrl, {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
-        body: new FormData(ctaForm)
+        body: new FormData(ctaForm),
+        signal: controller.signal
       }).then(function(r){
+        clearTimeout(timeout);
         if(!r.ok) throw new Error('bad status');
         return r.json();
       }).then(function(){
-        ctaForm.reset();
-        ctaForm.querySelectorAll('input, button').forEach(function(el){ el.hidden = true; });
-        statusEl.textContent = 'Спасибо! Заявка отправлена, скоро перезвоним.';
+        submitBtn.textContent = 'Отправлено ✓';
+        ctaForm.querySelectorAll('input, textarea').forEach(function(el){ el.disabled = true; });
+        statusEl.textContent = 'Спасибо! Скоро перезвоним.';
       }).catch(function(){
+        clearTimeout(timeout);
         submitBtn.disabled = false;
         submitBtn.textContent = 'Отправить заявку';
         statusEl.textContent = 'Не получилось отправить — позвоните нам напрямую.';
+        statusEl.classList.add('is-error');
       });
+    });
+  }
+  // Ссылка в hero: скроллим к блоку заявки и сразу разворачиваем форму
+  var heroRequestLink = document.getElementById('heroRequestLink');
+  if(heroRequestLink && ctaToggle && ctaForm){
+    heroRequestLink.addEventListener('click', function(e){
+      e.preventDefault();
+      document.getElementById('ctaBand').scrollIntoView({behavior:'smooth', block:'center'});
+      if(ctaForm.hidden) ctaToggle.click();
     });
   }
 })();
