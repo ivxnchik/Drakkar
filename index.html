@@ -7,10 +7,12 @@
 <meta name="description" content="Драккар-сервис в Санкт-Петербурге: ремонт ПВХ-лодок, RIB, SUP и других ПВХ-изделий, изготовление лодок и водных аттракционов. Более 10 лет опыта. Доставка по России.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0B1A24">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Драккар-сервис — ремонт ПВХ-лодок и производство">
 <meta property="og:description" content="Ремонт ПВХ-лодок, RIB, SUP и производство ПВХ-изделий в Санкт-Петербурге. Более 10 лет опыта.">
 <meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="img/hero-1.webp">
 <link rel="preload" href="./fonts/oswald-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="./fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -391,6 +393,19 @@
   .cta-band{ background:linear-gradient(120deg, var(--navy-panel), var(--navy)); }
   .cta-inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:28px; padding:70px 0; }
   .cta-inner h2{ font-size:clamp(30px,3.5vw,40px); max-width:18ch; }
+  .cta-form-wrap{ width:100%; display:flex; flex-direction:column; align-items:center; gap:16px; margin-top:6px; }
+  .cta-form-toggle{ background:none; border:none; color:var(--brass-bright); font-weight:700; font-size:15px; cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
+  .cta-form-toggle:hover{ color:var(--ice); }
+  .cta-form{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; max-width:640px; width:100%; }
+  .cta-form input{
+    flex:1 1 200px; min-width:0; background:var(--navy-deep); border:1px solid var(--line); color:var(--ice);
+    font-size:15px; padding:13px 16px; border-radius:var(--radius); font-family:inherit;
+  }
+  .cta-form input::placeholder{ color:var(--ice-dim); }
+  .cta-form input:focus{ outline:none; border-color:var(--brass-bright); }
+  .cta-form button[type="submit"]{ flex:0 0 auto; }
+  .cta-form-status{ flex-basis:100%; text-align:center; font-size:14px; color:var(--brass-bright); margin:0; min-height:1.2em; }
+  @media(max-width:600px){ .cta-form input, .cta-form button[type="submit"]{ flex:1 1 100%; width:100%; } }
   .cta-phone{
     font-family:'Oswald','Arial Narrow',sans-serif; font-size:31px; font-weight:600; color:var(--navy-deep);
     background:var(--brass);
@@ -570,7 +585,7 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
 
 <section class="hero">
   <div class="hero-media">
-    <picture><source media="(max-width: 480px)" srcset="img/hero-action-mobile.webp"><img class="zoomable" src="img/hero-action.webp" alt="Лодка Skyline SL-360 на ходу" width="3344" height="1882" fetchpriority="high"></picture>
+    <picture><source media="(max-width: 480px)" srcset="img/hero-action-mobile.webp"><img class="zoomable" src="img/hero-action.webp" alt="Лодка Skyline SL-360 на ходу" width="2000" height="1125" fetchpriority="high"></picture>
     <div class="hero-copy">
       <div class="wrap">
         <p class="hero-eyebrow">Драккар-сервис · Санкт-Петербург · более 10 лет опыта</p>
@@ -597,6 +612,7 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
     <div class="strip-item"><b>10+ лет</b>опыта работы с ПВХ</div>
     <div class="strip-item"><b>СПб + доставка</b>работаем по всей России</div>
     <div class="strip-item"><b>Skyline</b>собственное производство</div>
+    <div class="strip-item"><b>Гарантия</b>на все виды работ</div>
   </div>
 </div>
 
@@ -608,15 +624,15 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
     </div>
     <div class="fleet-grid">
       <div class="fleet-card tall fleet-a" data-fleet="sl300" tabindex="0" role="button" aria-label="Подробнее о Skyline SL-300">
-        <img src="img/hero-1.webp" alt="Лодка Skyline на закате у моря">
+        <img src="img/hero-1.webp" alt="Лодка Skyline на закате у моря" loading="lazy">
         <span class="tag">Skyline SL-300</span>
       </div>
       <div class="fleet-card fleet-b" data-fleet="rib" tabindex="0" role="button" aria-label="Подробнее о RIB-корпусе">
-        <img src="img/rib-winter1.webp" alt="RIB-лодка с жёстким корпусом">
+        <img src="img/rib-winter1.webp" alt="RIB-лодка с жёстким корпусом" loading="lazy">
         <span class="tag">RIB-корпус</span>
       </div>
       <div class="fleet-card fleet-c" data-fleet="attraction" tabindex="0" role="button" aria-label="Подробнее об аттракционах на заказ">
-        <img src="img/attraction-blue.webp" alt="Водный аттракцион собственного производства">
+        <img src="img/attraction-blue.webp" alt="Водный аттракцион собственного производства" loading="lazy">
         <span class="tag">Аттракционы на заказ</span>
       </div>
     </div>
@@ -649,8 +665,8 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
 
     <div class="ba-wrap">
       <div class="ba-slider" id="baSlider">
-        <img class="ba-after" src="img/after-sup.webp" alt="SUP-борд после ремонта">
-        <img class="ba-before" src="img/before-sup.webp" alt="SUP-борд до ремонта — повреждённое покрытие" id="baBeforeImg">
+        <img class="ba-after" src="img/after-sup.webp" alt="SUP-борд после ремонта" loading="lazy">
+        <img class="ba-before" src="img/before-sup.webp" alt="SUP-борд до ремонта — повреждённое покрытие" id="baBeforeImg" loading="lazy">
         <span class="ba-label ba-label-before">До</span>
         <span class="ba-label ba-label-after">После</span>
         <div class="ba-handle" id="baHandle"></div>
@@ -668,7 +684,7 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
     </div>
     <div class="prod-grid">
       <div class="prod-media">
-        <img class="zoomable" src="img/skyline-hull.webp" alt="Баллон лодки Skyline крупным планом с клеймом">
+        <img class="zoomable" src="img/skyline-hull.webp" alt="Баллон лодки Skyline крупным планом с клеймом" loading="lazy">
       </div>
       <div class="prod-list">
         <div class="prod-item">
@@ -706,7 +722,7 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
 
     <div class="models-grid-pro">
       <article class="model-card-pro">
-        <div class="model-media-pro"><img class="zoomable" src="img/hero-studio.webp" alt="Skyline SL-300 на белом фоне"><span class="model-status">В наличии / под заказ</span></div>
+        <div class="model-media-pro"><img class="zoomable" src="img/hero-studio.webp" alt="Skyline SL-300 на белом фоне" loading="lazy"><span class="model-status">В наличии / под заказ</span></div>
         <div class="model-copy-pro">
           <p class="kicker">01 · Надувная лодка</p>
           <h3>Skyline SL-300 / SL-360</h3>
@@ -717,7 +733,7 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
       </article>
 
       <article class="model-card-pro">
-        <div class="model-media-pro"><img class="zoomable" src="img/rib-winter2.webp" alt="RIB-лодка с жёстким корпусом"><span class="model-status">Изготовление</span></div>
+        <div class="model-media-pro"><img class="zoomable" src="img/rib-winter2.webp" alt="RIB-лодка с жёстким корпусом" loading="lazy"><span class="model-status">Изготовление</span></div>
         <div class="model-copy-pro">
           <p class="kicker">02 · Жёсткий корпус</p>
           <h3>RIB — баллоны на стеклопластиковый корпус</h3>
@@ -728,7 +744,7 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
       </article>
 
       <article class="model-card-pro">
-        <div class="model-media-pro"><img class="zoomable" src="img/attraction-full.webp" alt="Водный аттракцион Skyline полностью, вид в море"><span class="model-status">Под заказ</span></div>
+        <div class="model-media-pro"><img class="zoomable" src="img/attraction-full.webp" alt="Водный аттракцион Skyline полностью, вид в море" loading="lazy"><span class="model-status">Под заказ</span></div>
         <div class="model-copy-pro">
           <p class="kicker">03 · Водные аттракционы</p>
           <h3>Бананы, ватрушки, платформы</h3>
@@ -796,6 +812,18 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
     <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; justify-content:center;">
       <a class="cta-phone phone-copy" href="tel:+79789842779" data-phone="+7 978 984-27-79">+7 978 984-27-79</a>
       <a class="btn-secondary max-link" href="https://web.max.ru/133198339" target="_blank" rel="noopener">Написать в MAX</a>
+    </div>
+    <div class="cta-form-wrap">
+      <button type="button" class="cta-form-toggle" id="ctaFormToggle">Или оставьте заявку — перезвоним сами →</button>
+      <form class="cta-form" id="ctaForm" action="https://formsubmit.co/jolygooolf@gmail.com" method="POST" hidden>
+        <input type="hidden" name="_subject" value="Заявка с сайта Драккар-сервис">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="Имя" placeholder="Ваше имя" required>
+        <input type="tel" name="Телефон" placeholder="Телефон для связи" required>
+        <button type="submit" class="btn-primary">Отправить заявку</button>
+        <p class="cta-form-status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </div>
@@ -866,14 +894,18 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
 <div class="phone-toast" id="phoneToast" role="status" aria-live="polite">Номер скопирован в буфер обмена</div>
 <script>
 (function(){
-  // Браузер по умолчанию запоминает и восстанавливает прежнюю позицию
-  // прокрутки при перезагрузке страницы (это и создавало ощущение, что
-  // сайт «сам» открывается на прайс-листе, если до этого страницу
-  // пролистали вниз). Явно возвращаем наверх при обычном открытии сайта.
-  if(!window.location.hash){
-    window.scrollTo(0,0);
-    window.addEventListener('load', function(){ window.scrollTo(0,0); });
-  }
+  // Мобильные браузеры (особенно iOS Safari) восстанавливают прежнюю
+  // прокрутку при обновлении страницы по своему кэшу (bfcache), причём
+  // делают это уже ПОСЛЕ события load — обычного scrollTo при загрузке
+  // недостаточно. Форсируем возврат наверх на нескольких событиях и с
+  // небольшой задержкой, чтобы перебить это восстановление.
+  if(window.location.hash) return;
+  function toTop(){ window.scrollTo(0,0); }
+  toTop();
+  window.addEventListener('load', toTop);
+  window.addEventListener('pageshow', toTop);
+  setTimeout(toTop, 0);
+  setTimeout(toTop, 150);
 })();
 </script>
 <button class="back-to-top" id="backToTop" type="button" aria-label="Вернуться наверх" title="Наверх">
@@ -950,6 +982,43 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
       // на iOS — ссылка отработает как обычно (target=_blank), номер уже скопирован
     });
   });
+
+  // Форма заявки: показать по клику, отправить без перезагрузки страницы
+  var ctaToggle = document.getElementById('ctaFormToggle');
+  var ctaForm = document.getElementById('ctaForm');
+  if(ctaToggle && ctaForm){
+    ctaToggle.addEventListener('click', function(){
+      ctaForm.hidden = false;
+      ctaToggle.hidden = true;
+      var firstInput = ctaForm.querySelector('input');
+      if(firstInput) firstInput.focus();
+    });
+    ctaForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var statusEl = ctaForm.querySelector('.cta-form-status');
+      var submitBtn = ctaForm.querySelector('button[type="submit"]');
+      var actionUrl = ctaForm.getAttribute('action').replace('formsubmit.co/', 'formsubmit.co/ajax/');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Отправляем…';
+      statusEl.textContent = '';
+      fetch(actionUrl, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(ctaForm)
+      }).then(function(r){
+        if(!r.ok) throw new Error('bad status');
+        return r.json();
+      }).then(function(){
+        ctaForm.reset();
+        ctaForm.querySelectorAll('input, button').forEach(function(el){ el.hidden = true; });
+        statusEl.textContent = 'Спасибо! Заявка отправлена, скоро перезвоним.';
+      }).catch(function(){
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Отправить заявку';
+        statusEl.textContent = 'Не получилось отправить — позвоните нам напрямую.';
+      });
+    });
+  }
 })();
 </script>
 <script>
