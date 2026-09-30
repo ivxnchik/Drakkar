@@ -53,7 +53,7 @@ window.DRAKKAR_CONTENT = {
         kicker: 'Для RIB',
         title: 'Баллоны для RIB',
         text: 'Изготавливаем и заменяем надувные баллоны для RIB по геометрии стеклопластикового корпуса. Размеры и конфигурацию согласуем под конкретное судно.',
-        image: 'img/rib-winter1.webp',
+        image: 'img/rib-admiral.webp',
         alt: 'Баллоны, установленные на RIB'
       },
       attraction: {
@@ -95,7 +95,7 @@ window.DRAKKAR_CONTENT = {
     steps: [
       ['Раскрой и пошив', 'Подготавливаем материал, прошиваем стропы и силовые усилители. Крепления рассчитаны на реальную нагрузку буксировки и швартовки.'],
       ['Проклейка баллонов', 'Каждый баллон проклеиваем вручную и проверяем на герметичность мыльным раствором — под давлением, шов за швом.'],
-      ['Сборка и фурнитура', 'Ручки, кольца и усилители изготавливаем из ПВХ под конкретную модель. Никаких универсальных заготовок там, где нужна точная посадка.'],
+      ['Сборка и фурнитура', 'Подбираем готовые ручки, кольца и усилители или изготавливаем элементы из ПВХ под конфигурацию конкретной лодки.'],
       ['Контроль перед сдачей', 'Перед передачей клиенту проверяем герметичность, швы и посадку фурнитуры. Из мастерской лодка уезжает уже готовой к эксплуатации.']
     ],
     proofTitle: 'Почему это важно:',
@@ -110,13 +110,13 @@ window.DRAKKAR_CONTENT = {
         kicker: 'Надувная лодка', title: 'Skyline SL-300 / SL-360',
         text: 'Компактная лодка ПВХ для рыбалки и прогулок — подбираем комплектацию под вашу задачу.',
         points: ['Комплектация и цвет — по наличию', 'Подходит для установки мотора'],
-        action: 'Получить комплектацию и срок доставки', status: 'В наличии / под заказ', image: 'img/hero-studio.webp', alt: 'Надувная лодка Skyline'
+        action: 'Получить комплектацию и срок доставки', status: 'В наличии / под заказ', image: 'img/skyline-blue-underway.webp', alt: 'Надувная лодка Skyline SL-360 на воде'
       },
       {
         kicker: 'Баллоны для RIB', title: 'Баллоны по геометрии корпуса',
         text: 'Изготавливаем и заменяем баллоны повышенной плавучести точно под геометрию вашего корпуса.',
         points: ['Любые размеры и конфигурации', 'Согласование проекта до начала работ'],
-        action: 'Обсудить проект', status: 'Изготовление', image: 'img/rib-winter2.webp', alt: 'Баллоны для RIB на стеклопластиковом корпусе'
+        action: 'Обсудить проект', status: 'Изготовление', image: 'img/rib-admiral.webp', alt: 'Готовые баллоны для RIB Admiral на стеклопластиковом корпусе'
       },
       {
         kicker: 'Водные аттракционы', title: 'Бананы, ватрушки, платформы',
@@ -142,10 +142,10 @@ window.DRAKKAR_CONTENT = {
 
   reviews: {
     title: 'Отзывы клиентов',
-    intro: 'Актуальные отзывы клиентов — в карточке мастерской на Авито.',
-    rating: '',
-    meta: 'Отзывы на Авито',
-    text: 'Откройте карточку мастерской, чтобы посмотреть актуальные оценки и отзывы клиентов.'
+    intro: 'Рейтинг 4,8 из 5 — по данным профиля мастерской на Авито.',
+    rating: '4,8',
+    meta: 'оценка в профиле Авито',
+    text: 'Читайте оригинальные отзывы и проверяйте актуальный рейтинг в профиле мастерской.'
   },
 
   cta: {
@@ -213,7 +213,7 @@ window.DRAKKAR_CONTENT = {
   setText('.geo-band h2', c.geo.title); const geoPs=document.querySelectorAll('.geo-band > .wrap > div:first-child p'); if(geoPs[0]) geoPs[0].textContent=c.geo.text1; if(geoPs[1]) geoPs[1].textContent=c.geo.text2;
   document.querySelectorAll('.geo-list-item span').forEach((el,i)=>{if(c.geo.items[i])el.textContent=c.geo.items[i];});
 
-  setText('#reviews .section-head h2', c.reviews.title); setText('#reviews .section-head p', c.reviews.intro); setText('.reviews-proof p', c.reviews.text);
+  setText('#reviews .section-head h2', c.reviews.title); setText('#reviews .section-head p', c.reviews.intro); setText('.reviews-proof-main strong', c.reviews.rating + ' из 5'); setText('.reviews-proof-main span:last-child', c.reviews.meta); setText('.reviews-proof p', c.reviews.text);
   setText('.cta-band h2', c.cta.title);
 
   const fc=document.querySelectorAll('.footer-col');
