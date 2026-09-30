@@ -44,8 +44,8 @@ window.DRAKKAR_CONTENT = {
     items: {
       sl300: {
         kicker: 'Собственная модель Skyline',
-        title: 'Skyline SL-300',
-        text: 'Компактная лодка для рыбалки и отдыха. Изготавливаем под заказ и можем обсудить комплектацию, цвет и нужные доработки.',
+        title: 'Лодки Skyline',
+        text: 'В линейке — моторные лодки SL-300 и SL-360. У моделей одинаковая комплектация, различаются размеры; подскажем, какая подойдёт под вашу задачу.',
         image: 'img/hero-1.webp',
         alt: 'Лодка Skyline SL-300 на берегу моря'
       },
@@ -108,9 +108,21 @@ window.DRAKKAR_CONTENT = {
     cards: [
       {
         kicker: 'Надувная лодка', title: 'Skyline SL-300 / SL-360',
-        text: 'Компактная лодка ПВХ для рыбалки и прогулок — подбираем комплектацию под вашу задачу.',
-        points: ['Комплектация и цвет — по наличию', 'Подходит для установки мотора'],
-        action: 'Получить комплектацию и срок доставки', status: 'В наличии / под заказ', image: 'img/skyline-blue-underway.webp', alt: 'Надувная лодка Skyline SL-360 на воде'
+        text: 'Моторные лодки SL-300 и SL-360 имеют одинаковую комплектацию и отличаются размерами. Подойдут для рыбалки и прогулок.',
+        points: ['Баллоны 850 г/м² · днище 1100 г/м²', '7 отсеков · AirDeck высокого давления', 'Комплектация и цвет — по наличию', 'Подходит для установки мотора'],
+        prices: [['SL-300', '51 000 ₽'], ['SL-360', '75 000 ₽']],
+        specs: [
+          'Материал баллонов — 850 г/м²; материал днища — 1100 г/м²',
+          '7 герметичных отсеков и два клапана сброса избыточного давления',
+          'Дно высокого давления AirDeck',
+          'Диаметр баллонов — 45 см',
+          'Транспортировочные D-кольца и большая рым-ручка в комплекте',
+          'Люверсно-леерная обвязка и 8 мягких ручек',
+          'Нескользящее покрытие на днище, транце и двух банках',
+          'Скеги защищены полиуретановой плёнкой',
+          'Тройная проклейка швов'
+        ],
+        action: 'Уточнить наличие и комплектацию', status: 'Собственное производство', image: 'img/skyline-blue-underway.webp', alt: 'Надувная лодка Skyline SL-360 на воде'
       },
       {
         kicker: 'Баллоны для RIB', title: 'Баллоны по геометрии корпуса',
@@ -206,7 +218,44 @@ window.DRAKKAR_CONTENT = {
 
   setText('#models .section-head h2', c.models.title);
   setText('#models .section-head p', c.models.intro);
-  document.querySelectorAll('.model-card-pro').forEach((card, i) => { const d = c.models.cards[i]; if (!d) return; card.querySelector('.kicker').textContent = d.kicker; card.querySelector('h3').textContent = d.title; card.querySelector('.model-copy-pro > p:not(.kicker)').textContent = d.text; card.querySelector('.model-status').textContent = d.status; const pts = card.querySelectorAll('.model-points li'); d.points.forEach((p,j)=>{ if(pts[j]) pts[j].textContent=p; }); const action=card.querySelector('.model-action'); if(action){ action.childNodes[0].textContent=d.action+' '; } const img=card.querySelector('img'); if(img){img.src=d.image; img.alt=d.alt;} });
+  document.querySelectorAll('.model-card-pro').forEach((card, i) => {
+    const d = c.models.cards[i]; if (!d) return;
+    card.querySelector('.kicker').textContent = d.kicker;
+    card.querySelector('h3').textContent = d.title;
+    card.querySelector('.model-copy-pro > p:not(.kicker)').textContent = d.text;
+    card.querySelector('.model-status').textContent = d.status;
+    const pts = card.querySelectorAll('.model-points li');
+    d.points.forEach((p,j)=>{ if(pts[j]) pts[j].textContent=p; });
+    const prices = card.querySelector('.model-prices');
+    if(prices && d.prices){
+      prices.replaceChildren();
+      d.prices.forEach(([model, price])=>{
+        const row=document.createElement('div');
+        const modelName=document.createElement('span'); modelName.textContent=model;
+        const amount=document.createElement('strong'); amount.textContent=price;
+        row.append(modelName,amount); prices.appendChild(row);
+      });
+    }
+    const action=card.querySelector('.model-action');
+    if(action){ action.childNodes[0].textContent=d.action+' '; }
+    const img=card.querySelector('img'); if(img){img.src=d.image; img.alt=d.alt;}
+  });
+  const boatCardData = c.models.cards[0];
+  const boatSpecList = document.getElementById('boatSpecsList');
+  if(boatCardData && boatSpecList && boatCardData.specs){
+    boatSpecList.replaceChildren();
+    boatCardData.specs.forEach(text=>{const item=document.createElement('li');item.textContent=text;boatSpecList.appendChild(item);});
+  }
+  const boatSpecPrices = document.getElementById('boatSpecsPrices');
+  if(boatCardData && boatSpecPrices && boatCardData.prices){
+    boatSpecPrices.replaceChildren();
+    boatCardData.prices.forEach(([model, price])=>{
+      const row=document.createElement('div');
+      const modelName=document.createElement('span'); modelName.textContent=model;
+      const amount=document.createElement('strong'); amount.textContent=price;
+      row.append(modelName,amount); boatSpecPrices.appendChild(row);
+    });
+  }
   setText('.models-note strong', c.models.noteTitle);
   setText('.models-note-copy', c.models.noteText);
 
