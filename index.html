@@ -291,6 +291,11 @@
   .model-action:hover span{transform:translateX(4px);}
   .models-note{margin:18px 0 0;padding:17px 20px;border:1px solid var(--line);border-radius:var(--radius);color:var(--ice-dim);font-size:13px;line-height:1.5;}
   .models-note strong{color:var(--ice);}
+  .models-note{display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .models-note-copy{display:block;margin-top:3px;}
+  .models-note-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;white-space:nowrap;}
+  .models-note-actions a{color:var(--brass-bright);font-weight:700;text-decoration:underline;text-underline-offset:3px;}
+  @media(max-width:760px){.models-note{align-items:flex-start;flex-direction:column;gap:14px}.models-note-actions{white-space:normal;}}
   .boat-gallery{margin:30px 0 0;}
   .boat-gallery-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:16px;}
   .boat-gallery-head h3{font-size:25px;color:var(--ice);}
@@ -538,10 +543,13 @@
   .zoomable{ cursor:zoom-in; }
   .lightbox{
     position:fixed; inset:0; z-index:200; background:rgba(6,14,20,0.94);
-    display:none; align-items:center; justify-content:center; padding:32px;
+    display:flex; align-items:center; justify-content:center; padding:32px;
     backdrop-filter:blur(4px); overflow:hidden;
+    opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease,visibility .22s ease;
   }
-  .lightbox.open{ display:flex; }
+  .lightbox.open{opacity:1;visibility:visible;pointer-events:auto;}
+  .lightbox.open .lightbox-stage img{animation:lightboxImageIn .24s ease both;}
+  @keyframes lightboxImageIn{from{opacity:0}to{opacity:1}}
   .lightbox-stage{
     width:100%; height:100%; display:flex; align-items:center; justify-content:center;
     overflow:hidden; touch-action:none;
@@ -561,6 +569,11 @@
     cursor:pointer; border:1px solid var(--line); z-index:2;
   }
   .lightbox-close:hover{ background:rgba(237,243,245,0.18); }
+  .lightbox-gallery-nav{display:none;position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:48px;height:48px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:50%;background:rgba(6,14,20,.68);color:var(--ice);font:400 28px/1 Manrope,sans-serif;cursor:pointer;backdrop-filter:blur(8px);}
+  .lightbox.is-gallery .lightbox-gallery-nav{display:flex;}
+  .lightbox-gallery-prev{left:22px;}.lightbox-gallery-next{right:22px;}
+  .lightbox-gallery-count{display:none;position:absolute;top:24px;left:50%;transform:translateX(-50%);z-index:3;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(6,14,20,.68);color:var(--ice);font-size:13px;}
+  .lightbox.is-gallery .lightbox-gallery-count{display:block;}
   .lightbox-tools{
     position:absolute; left:50%; bottom:22px; transform:translateX(-50%); z-index:2;
     display:flex; align-items:center; gap:8px; padding:7px;
@@ -581,6 +594,9 @@
     .lightbox-close{top:14px;right:14px;}
     .lightbox-tools{bottom:14px;}
     .lightbox-hint{display:none;}
+    .lightbox-gallery-prev{left:8px;}.lightbox-gallery-next{right:8px;}
+    .lightbox-gallery-nav{width:42px;height:42px;}
+    .lightbox-gallery-count{top:18px;}
   }
 </style>
 <script type="application/ld+json">
@@ -609,6 +625,7 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
         <a class="nav-link" href="#services">Ремонт</a>
         <a class="nav-link" href="#models">Лодки и аттракционы</a>
         <a class="nav-link" href="#production">Производство</a>
+        <a class="nav-link" href="#gallery">Галерея работ</a>
         <a class="nav-link" href="#reviews">Отзывы</a>
       </div>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="siteNavLinks" aria-label="Открыть меню"><span></span><span></span><span></span></button>
@@ -717,20 +734,11 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
         </div>
       </article>
     </div>
-    <div class="boat-gallery" aria-labelledby="boatGalleryTitle">
-      <div class="boat-gallery-head">
-        <h3 id="boatGalleryTitle">Одна из изготовленных лодок</h3>
-        <p>Реальные фотографии готового изделия: общий вид, кокпит и детали оснащения.</p>
-      </div>
-      <div class="boat-gallery-grid">
-        <img class="zoomable" src="img/skyline-detail/skyline-side.webp" alt="Надувная лодка Skyline, вид сбоку" loading="lazy">
-        <img class="zoomable" src="img/skyline-detail/skyline-bow.webp" alt="Носовая часть лодки Skyline и оснащение кокпита" loading="lazy">
-        <img class="zoomable" src="img/skyline-detail/skyline-transom.webp" alt="Транец и внутреннее оснащение лодки Skyline" loading="lazy">
-        <img class="zoomable" src="img/skyline-detail/skyline-detail-rope.webp" alt="Крепление фалиня на баллоне лодки Skyline" loading="lazy">
-        <img class="zoomable" src="img/skyline-detail/skyline-interior.webp" alt="Кокпит лодки Skyline с сиденьями и пайолами" loading="lazy">
-      </div>
+    
+    <div class="models-note">
+      <div><strong>Не нашли нужную конфигурацию?</strong><span class="models-note-copy">Подберём вариант под вашу задачу.</span></div>
+      <div class="models-note-actions"><a href="#ctaBand" data-open-cta="true">Оставить заявку →</a><span>или</span><a class="phone-copy" href="tel:+79789842779" data-phone="+7 978 984-27-79">+7 978 984-27-79</a></div>
     </div>
-    <div class="models-note"><strong>Не нашли нужную конфигурацию?</strong> Сделаем по фотографии, эскизу или просто обсудим задачу по телефону.</div>
   </div>
 </section>
 
@@ -761,16 +769,7 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
     <p class="price-note">Отдельное направление — производство изделий из ПВХ и аэрдека не только для лодок: гимнастические дорожки и покрышки для борцовских залов, надувные бассейны, палатки и другие надувные конструкции — любые размеры и плотность материала под заказ.</p>
     <p class="price-note">Также работаем с юридическими лицами и ИП.</p>
 
-    <div class="ba-wrap">
-      <div class="ba-slider" id="baSlider">
-        <img class="ba-after" src="img/after-sup.webp" alt="SUP-борд после ремонта" loading="lazy">
-        <img class="ba-before" src="img/before-sup.webp" alt="SUP-борд до ремонта — повреждённое покрытие" id="baBeforeImg" loading="lazy">
-        <span class="ba-label ba-label-before">До</span>
-        <span class="ba-label ba-label-after">После</span>
-        <div class="ba-handle" id="baHandle"></div>
-      </div>
-      <p class="ba-caption">Реальный пример восстановления SUP-борда — потянуть за ползунок, чтобы увидеть разницу.</p>
-    </div>
+    
   </div>
 </section>
 
@@ -807,6 +806,38 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
         </div>
         <div class="prod-proof"><strong>Почему это важно:</strong> мы отвечаем не только за внешний вид лодки, но и за то, как она поведёт себя под нагрузкой на воде.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Галерея работ</h2>
+      <p>Готовые изделия и реальные примеры восстановления — без постановочных историй.</p>
+    </div>
+    <div class="boat-gallery" aria-labelledby="boatGalleryTitle">
+      <div class="boat-gallery-head">
+        <h3 id="boatGalleryTitle">Одна из изготовленных лодок</h3>
+        <p>Реальные фотографии готового изделия. Нажмите на снимок, чтобы открыть просмотр и пролистать все ракурсы.</p>
+      </div>
+      <div class="boat-gallery-grid">
+        <img class="zoomable" src="img/skyline-detail/skyline-side.webp" alt="Надувная лодка Skyline, вид сбоку" role="button" tabindex="0" loading="lazy">
+        <img class="zoomable" src="img/skyline-detail/skyline-bow.webp" alt="Носовая часть лодки Skyline и оснащение кокпита" role="button" tabindex="0" loading="lazy">
+        <img class="zoomable" src="img/skyline-detail/skyline-transom.webp" alt="Транец и внутреннее оснащение лодки Skyline" role="button" tabindex="0" loading="lazy">
+        <img class="zoomable" src="img/skyline-detail/skyline-detail-rope.webp" alt="Крепление фалиня на баллоне лодки Skyline" role="button" tabindex="0" loading="lazy">
+        <img class="zoomable" src="img/skyline-detail/skyline-interior.webp" alt="Кокпит лодки Skyline с сиденьями и пайолами" role="button" tabindex="0" loading="lazy">
+      </div>
+    </div>
+    <div class="ba-wrap">
+      <div class="ba-slider" id="baSlider">
+        <img class="ba-after" src="img/after-sup.webp" alt="SUP-борд после ремонта" loading="lazy">
+        <img class="ba-before" src="img/before-sup.webp" alt="SUP-борд до ремонта — повреждённое покрытие" id="baBeforeImg" loading="lazy">
+        <span class="ba-label ba-label-before">До</span>
+        <span class="ba-label ba-label-after">После</span>
+        <div class="ba-handle" id="baHandle"></div>
+      </div>
+      <p class="ba-caption">Реальный пример восстановления SUP-борда — потянуть за ползунок, чтобы увидеть разницу.</p>
     </div>
   </div>
 </section>
@@ -948,9 +979,12 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
 
 <div class="lightbox" id="lightbox" aria-hidden="true">
   <div class="lightbox-close" id="lightboxClose" aria-label="Закрыть">✕</div>
+  <button class="lightbox-gallery-nav lightbox-gallery-prev" id="lightboxGalleryPrev" type="button" aria-label="Предыдущее фото">‹</button>
+  <span class="lightbox-gallery-count" id="lightboxGalleryCount" aria-live="polite"></span>
   <div class="lightbox-stage" id="lightboxStage">
     <img id="lightboxImg" src="" alt="" draggable="false" ondragstart="return false">
   </div>
+  <button class="lightbox-gallery-nav lightbox-gallery-next" id="lightboxGalleryNext" type="button" aria-label="Следующее фото">›</button>
   <div class="lightbox-tools" aria-label="Управление увеличением">
     <button class="lightbox-tool" id="lightboxMinus" type="button" aria-label="Уменьшить">−</button>
     <span class="lightbox-hint">Колесо / жест двумя пальцами</span>
@@ -1180,6 +1214,11 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
   var lightboxPlus = document.getElementById('lightboxPlus');
   var lightboxMinus = document.getElementById('lightboxMinus');
   var lightboxReset = document.getElementById('lightboxReset');
+  var galleryImages = Array.from(document.querySelectorAll('#gallery .boat-gallery-grid .zoomable'));
+  var galleryPrev = document.getElementById('lightboxGalleryPrev');
+  var galleryNext = document.getElementById('lightboxGalleryNext');
+  var galleryCount = document.getElementById('lightboxGalleryCount');
+  var currentGalleryIndex = -1;
   var zoom = 1, panX = 0, panY = 0, dragging = false, startX = 0, startY = 0;
   var pinchStart = 0, pinchZoom = 1;
 
@@ -1203,17 +1242,45 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
     applyZoom();
   }
 
+  function showLightboxImage(img){
+    lightboxImg.src = img.currentSrc || img.src;
+    lightboxImg.alt = img.alt;
+    resetZoom();
+    if(currentGalleryIndex >= 0){
+      galleryCount.textContent = (currentGalleryIndex + 1) + ' / ' + galleryImages.length;
+    }
+  }
+  function openLightbox(img){
+    currentGalleryIndex = galleryImages.indexOf(img);
+    lightbox.classList.toggle('is-gallery', currentGalleryIndex >= 0);
+    showLightboxImage(img);
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden','false');
+  }
+  function moveGallery(step){
+    if(currentGalleryIndex < 0 || !galleryImages.length)return;
+    currentGalleryIndex=(currentGalleryIndex+step+galleryImages.length)%galleryImages.length;
+    showLightboxImage(galleryImages[currentGalleryIndex]);
+  }
   document.querySelectorAll('.zoomable').forEach(function(img){
-    img.addEventListener('click', function(){
-      lightboxImg.src = img.currentSrc || img.src;
-      lightboxImg.alt = img.alt;
-      resetZoom();
-      lightbox.classList.add('open');
-      lightbox.setAttribute('aria-hidden','false');
-    });
+    img.addEventListener('click', function(){openLightbox(img);});
+    if(galleryImages.indexOf(img)>=0){
+      img.addEventListener('keydown',function(e){
+        if(e.key==='Enter'||e.key===' '){e.preventDefault();openLightbox(img);}
+      });
+    }
   });
-  function closeLightbox(){ lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden','true'); lightboxImg.src=''; resetZoom(); }
+  function closeLightbox(){
+    if(!lightbox.classList.contains('open'))return;
+    lightbox.classList.remove('open','is-gallery');
+    lightbox.setAttribute('aria-hidden','true');
+    currentGalleryIndex=-1;
+    resetZoom();
+    setTimeout(function(){if(!lightbox.classList.contains('open'))lightboxImg.src='';},240);
+  }
   lightboxClose.addEventListener('click', closeLightbox);
+  galleryPrev.addEventListener('click', function(){moveGallery(-1);});
+  galleryNext.addEventListener('click', function(){moveGallery(1);});
   lightboxPlus.addEventListener('click', function(){ changeZoom(1); });
   lightboxMinus.addEventListener('click', function(){ changeZoom(-1); });
   lightboxReset.addEventListener('click', resetZoom);
@@ -1233,14 +1300,22 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
   lightboxStage.addEventListener('pointerup', function(){ dragging=false; lightbox.classList.remove('is-dragging'); });
   lightboxStage.addEventListener('pointercancel', function(){ dragging=false; lightbox.classList.remove('is-dragging'); });
   lightboxImg.addEventListener('dragstart', function(e){ e.preventDefault(); });
-  var touchPanStartX=0, touchPanStartY=0;
+  var touchPanStartX=0, touchPanStartY=0, swipeStartX=0, swipeStartY=0;
   lightboxStage.addEventListener('touchstart', function(e){
     if(e.touches.length===2){
       pinchStart=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
       pinchZoom=zoom;
+    } else if(e.touches.length===1 && zoom<=1){
+      swipeStartX=e.touches[0].clientX; swipeStartY=e.touches[0].clientY;
     } else if(e.touches.length===1 && zoom>1){
       touchPanStartX=e.touches[0].clientX-panX; touchPanStartY=e.touches[0].clientY-panY;
     }
+  }, {passive:true});
+  lightboxStage.addEventListener('touchend', function(e){
+    if(zoom>1 || currentGalleryIndex<0 || !e.changedTouches.length)return;
+    var dx=e.changedTouches[0].clientX-swipeStartX;
+    var dy=e.changedTouches[0].clientY-swipeStartY;
+    if(Math.abs(dx)>55 && Math.abs(dx)>Math.abs(dy)*1.2)moveGallery(dx<0?1:-1);
   }, {passive:true});
   lightboxStage.addEventListener('touchmove', function(e){
     if(e.touches.length===2){
@@ -1257,8 +1332,13 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
   }, {passive:false});
   lightbox.addEventListener('click', function(e){ if(e.target === lightbox) closeLightbox(); });
   window.addEventListener('keydown', function(e){
+    if(!lightbox.classList.contains('open'))return;
     if(e.key === 'Escape') closeLightbox();
-    if(lightbox.classList.contains('open')){ if(e.key==='+' || e.key==='=') changeZoom(0.5); if(e.key==='-' || e.key==='_') changeZoom(-0.5); if(e.key==='0') resetZoom(); }
+    if(currentGalleryIndex>=0 && e.key==='ArrowLeft')moveGallery(-1);
+    if(currentGalleryIndex>=0 && e.key==='ArrowRight')moveGallery(1);
+    if(e.key==='+' || e.key==='=') changeZoom(0.5);
+    if(e.key==='-' || e.key==='_') changeZoom(-0.5);
+    if(e.key==='0') resetZoom();
   });
 })();
 </script>
