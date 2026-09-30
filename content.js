@@ -20,7 +20,7 @@ window.DRAKKAR_CONTENT = {
   header: {
     logo: 'Драккар-сервис',
     subtitle: 'Ремонт и производство ПВХ',
-    nav: ['Ремонт', 'Лодки и аттракционы', 'Производство', 'Галерея работ', 'Отзывы']
+    nav: ['Ремонт', 'Лодки и аттракционы', 'Производство', 'Отзывы']
   },
 
   hero: {
@@ -120,7 +120,7 @@ window.DRAKKAR_CONTENT = {
       }
     ],
     noteTitle: 'Не нашли нужную конфигурацию?',
-    noteText: 'Подберём вариант под вашу задачу.'
+    noteText: 'Сделаем по фотографии, эскизу или просто обсудим задачу по телефону.'
   },
 
   geo: {
@@ -202,7 +202,7 @@ window.DRAKKAR_CONTENT = {
   setText('#models .section-head p', c.models.intro);
   document.querySelectorAll('.model-card-pro').forEach((card, i) => { const d = c.models.cards[i]; if (!d) return; card.querySelector('.kicker').textContent = d.kicker; card.querySelector('h3').textContent = d.title; card.querySelector('.model-copy-pro > p:not(.kicker)').textContent = d.text; card.querySelector('.model-status').textContent = d.status; const pts = card.querySelectorAll('.model-points li'); d.points.forEach((p,j)=>{ if(pts[j]) pts[j].textContent=p; }); const action=card.querySelector('.model-action'); if(action){ action.childNodes[0].textContent=d.action+' '; } const img=card.querySelector('img'); if(img){img.src=d.image; img.alt=d.alt;} });
   setText('.models-note strong', c.models.noteTitle);
-  setText('.models-note-copy', c.models.noteText);
+  const note = document.querySelector('.models-note'); if (note) note.childNodes[note.childNodes.length - 1].textContent = ' ' + c.models.noteText;
 
   setText('.geo-band h2', c.geo.title); const geoPs=document.querySelectorAll('.geo-band > .wrap > div:first-child p'); if(geoPs[0]) geoPs[0].textContent=c.geo.text1; if(geoPs[1]) geoPs[1].textContent=c.geo.text2;
   document.querySelectorAll('.geo-list-item span').forEach((el,i)=>{if(c.geo.items[i])el.textContent=c.geo.items[i];});
