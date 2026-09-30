@@ -177,7 +177,7 @@
   .hero-media img{ filter:saturate(1.05) brightness(0.92); object-position:center center; }
   .hero-media::after{
     content:''; position:absolute; inset:0; z-index:1;
-    background:linear-gradient(180deg, rgba(11,26,36,0.15) 0%, rgba(11,26,36,0.55) 65%, rgba(11,26,36,0.96) 100%);
+    background:linear-gradient(180deg, rgba(11,26,36,0.2) 0%, rgba(11,26,36,0.65) 48%, rgba(11,26,36,0.97) 100%);
   }
   .hero-copy{
     position:absolute; left:0; right:0; bottom:0; z-index:2;
@@ -185,7 +185,7 @@
   }
   .hero-eyebrow{ color:var(--brass-bright); font-size:15px; margin-bottom:16px; font-weight:500; }
   .hero h1{ font-size:clamp(38px,5.5vw,64px); color:var(--ice); max-width:16ch; margin-bottom:20px; }
-  .hero p.lead{ font-size:18px; color:var(--ice-dim); max-width:48ch; margin-bottom:32px; }
+  .hero p.lead{ font-size:18px; color:var(--ice); text-shadow:0 2px 12px rgba(0,0,0,.7); max-width:48ch; margin-bottom:32px; }
   .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; }
   .hero-request-link{ flex-basis:100%; color:var(--ice-dim); font-size:14px; padding:2px 0 0; border:none; }
   .hero-request-link:hover{ color:var(--brass-bright); }
@@ -239,10 +239,11 @@
   .fleet-a{ height:520px; }
   .fleet-b{ height:251px; }
   .fleet-c{ height:251px; }
+  .fleet-wide{grid-column:1 / -1;height:300px;}
   @media (max-width:780px){
     .fleet-grid{ grid-template-columns:1fr; }
     .fleet-grid .tall{ grid-row:auto; }
-    .fleet-a, .fleet-b, .fleet-c{ height:320px; }
+    .fleet-a, .fleet-b, .fleet-c, .fleet-wide{ height:320px;grid-column:auto; }
   }
 
 
@@ -318,6 +319,13 @@
   .price-row .desc{ display:block; font-size:14px; color:var(--ice-dim); margin-top:5px; font-family:'Manrope',sans-serif; font-weight:400; }
   .price-row .price{ font-family:'Oswald','Arial Narrow',sans-serif; font-size:23px; font-weight:600; color:var(--brass-bright); white-space:nowrap; }
   .price-note{ margin-top:30px; color:var(--ice-dim); font-size:14.5px; line-height:1.7; }
+  .service-scope{margin:34px 0 4px;}
+  .service-scope h3{font-size:23px;color:var(--ice);margin-bottom:18px;}
+  .service-scope-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 30px;border-top:1px solid var(--line);}
+  .service-scope-item{padding:17px 0;border-bottom:1px solid var(--line);}
+  .service-scope-item strong{display:block;color:var(--ice);font-size:15px;margin-bottom:5px;}
+  .service-scope-item span{display:block;color:var(--ice-dim);font-size:13px;line-height:1.6;}
+  @media(max-width:680px){.service-scope-grid{grid-template-columns:1fr;gap:0}.service-scope-item{padding:14px 0}}
 
 
   /* REPAIR LIST */
@@ -652,7 +660,7 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
         <p class="lead">Производим надувные лодки и изделия из ПВХ, ремонтируем лодки, RIB и SUP. Работаем с частными заказчиками и бизнесом в Санкт-Петербурге, отправляем готовые изделия по России.</p>
         <div class="hero-actions">
           <a class="btn-primary" href="#models">Посмотреть лодки Skyline</a>
-          <a class="btn-secondary" href="#services">Ремонт лодки</a>
+          <a class="btn-primary" href="#services">Ремонт лодки</a>
           <a class="btn-ghost hero-request-link" href="#ctaBand" id="heroRequestLink">Обсудить задачу →</a>
         </div>
       </div>
@@ -665,7 +673,6 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
     <div class="strip-item"><b>10+ лет</b>опыта работы с ПВХ</div>
     <div class="strip-item"><b>СПб + доставка</b>работаем по всей России</div>
     <div class="strip-item"><b>Skyline</b>собственное производство</div>
-  <div class="strip-item"><b>Проверка</b>перед сдачей изделия</div>
   </div>
 </div>
 
@@ -673,20 +680,24 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
   <div class="wrap">
     <div class="section-head">
       <h2>Что производим</h2>
-      <p>Лодки ПВХ, RIB и водные аттракционы — от готовых моделей до изделий под заказ.</p>
+      <p>Лодки Skyline, баллоны для RIB, водные аттракционы и изделия из ПВХ — для частных задач и бизнеса.</p>
     </div>
     <div class="fleet-grid">
       <div class="fleet-card tall fleet-a" data-fleet="sl300" tabindex="0" role="button" aria-label="Подробнее о Skyline SL-300">
         <img src="img/hero-1.webp" alt="Лодка Skyline на закате у моря" loading="lazy">
         <span class="tag">Skyline SL-300</span>
       </div>
-      <div class="fleet-card fleet-b" data-fleet="rib" tabindex="0" role="button" aria-label="Подробнее о RIB-корпусе">
-        <img src="img/rib-winter1.webp" alt="RIB-лодка с жёстким корпусом" loading="lazy">
-        <span class="tag">RIB-корпус</span>
+      <div class="fleet-card fleet-b" data-fleet="rib" tabindex="0" role="button" aria-label="Подробнее о баллонах для RIB">
+        <img src="img/rib-winter1.webp" alt="RIB с надувными баллонами на стеклопластиковом корпусе" loading="lazy">
+        <span class="tag">Баллоны для RIB</span>
       </div>
       <div class="fleet-card fleet-c" data-fleet="attraction" tabindex="0" role="button" aria-label="Подробнее об аттракционах на заказ">
         <img src="img/attraction-blue.webp" alt="Водный аттракцион собственного производства" loading="lazy">
         <span class="tag">Аттракционы на заказ</span>
+      </div>
+      <div class="fleet-card fleet-wide" data-fleet="mat" tabindex="0" role="button" aria-label="Подробнее о матах для спортивных залов">
+        <img src="img/wrestling-mat.webp" alt="Борцовский мат из ПВХ в спортивном зале" loading="lazy">
+        <span class="tag">Маты и покрышки для залов</span>
       </div>
     </div>
   </div>
@@ -712,10 +723,10 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
       </article>
 
       <article class="model-card-pro">
-        <div class="model-media-pro"><img class="zoomable" src="img/rib-winter2.webp" alt="RIB-лодка с жёстким корпусом" loading="lazy"><span class="model-status">Изготовление</span></div>
+        <div class="model-media-pro"><img class="zoomable" src="img/rib-winter2.webp" alt="Баллоны для RIB на стеклопластиковом корпусе" loading="lazy"><span class="model-status">Изготовление</span></div>
         <div class="model-copy-pro">
-          <p class="kicker">02 · Жёсткий корпус</p>
-          <h3>RIB — баллоны на стеклопластиковый корпус</h3>
+          <p class="kicker">02 · Баллоны для RIB</p>
+          <h3>Баллоны по геометрии корпуса</h3>
           <p>Изготавливаем и заменяем баллоны повышенной плавучести точно под геометрию вашего корпуса.</p>
           <ul class="model-points"><li>Любые размеры и конфигурации</li><li>Согласование проекта до начала работ</li></ul>
           <a href="tel:+79789842779" data-phone="+7 978 984-27-79" class="model-action phone-copy">Обсудить проект <span>→</span></a>
@@ -776,9 +787,19 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
         <a class="btn-secondary max-link" href="https://web.max.ru/133198339" target="_blank" rel="noopener">Написать в MAX</a>
       </div>
     </div>
-    <p class="price-note">Также в работе: ремонт RIB и катеров, ремонт байдарок и каяков, ремонт пробоин стеклопластиковых лодок с выездом к клиенту, ремонт надувного дна и SUP-досок, бронирование корпуса полиуретаном, алюминиевые пайолы, предпродажная подготовка и консервация лодок к новому сезону. Работаем с Прогресс, Казанка, Днепр, Нева, Невка, Обь, Амур — и другими моделями. Полный список и точную цену уточняйте по телефону.</p>
-    <p class="price-note">Отдельное направление — производство изделий из ПВХ и аэрдека не только для лодок: гимнастические дорожки и покрышки для борцовских залов, надувные бассейны, палатки и другие надувные конструкции — любые размеры и плотность материала под заказ.</p>
-    <p class="price-note">Также работаем с юридическими лицами и ИП.</p>
+    <p class="price-note">Ремонтируем и обслуживаем лодки, катера, RIB, SUP и другие изделия из ПВХ. Помимо работ с ориентировочными ценами выше, выполняем диагностику, тюнинг, изготовление изделий и сезонную подготовку.</p>
+    <div class="service-scope">
+      <h3>Другие работы мастерской</h3>
+      <div class="service-scope-grid">
+        <div class="service-scope-item"><strong>Лодки, катера и RIB</strong><span>Диагностика, восстановление швов и герметичности, замена транца, бронирование днища полиуретаном.</span></div>
+        <div class="service-scope-item"><strong>Баллоны и доработки</strong><span>Изготовление и замена баллонов повышенной плавучести для RIB и других судов по геометрии корпуса.</span></div>
+        <div class="service-scope-item"><strong>Аттракционы и изделия из ПВХ</strong><span>Производство и ремонт бананов, ватрушек, бассейнов, SUP-досок, надувных матрасов, палаток и других конструкций.</span></div>
+        <div class="service-scope-item"><strong>Аэрдек</strong><span>Гимнастические дорожки, надувные днища и другие изделия — по размерам и форме под задачу.</span></div>
+        <div class="service-scope-item"><strong>Маты для спортивных залов</strong><span>Покрышки и маты из ПВХ для борцовских и спортивных залов — нужные размеры, плотность и конфигурация.</span></div>
+        <div class="service-scope-item"><strong>Фурнитура и сезонное обслуживание</strong><span>Изготовление и замена ручек и другой фурнитуры, ремонт каяков, предпродажная подготовка и консервация лодок.</span></div>
+      </div>
+    </div>
+    <p class="price-note">Работаем с частными заказчиками, юридическими лицами и ИП. Точную стоимость дополнительных работ определяем после осмотра изделия.</p>
 
     <div class="ba-wrap">
       <div class="ba-slider" id="baSlider">
@@ -860,18 +881,12 @@ if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
       <h2>Отзывы клиентов</h2>
       <p>Рейтинг и отзывы — с карточки услуг на Авито.</p>
     </div>
-    <div class="rating-summary">
-      <span class="num">4,8</span>
-      <span class="meta">из 5 · 19 отзывов на Авито</span>
-    </div>
     <div class="reviews-proof">
       <div class="reviews-proof-main">
-        <span class="reviews-proof-stars">★★★★★</span>
-        <strong>4,8 из 5</strong>
-        <span>19 отзывов на Авито</span>
+        <strong>Отзывы на Авито</strong>
       </div>
       <div>
-        <p>Отзывы и оценки клиентов — в карточке мастерской на Авито. Перед заказом можно посмотреть реальные впечатления о работе.</p>
+        <p>Актуальные оценки и отзывы — в карточке мастерской на Авито.</p>
         <a class="reviews-link" href="https://www.avito.ru/sankt-peterburg/predlozheniya_uslug/remont_i_obsluzhivanie_lodok_katerov_sup_dosok_rib_2146189255#open-item-reviews-list" target="_blank" rel="noopener noreferrer">Смотреть отзывы на Авито →</a>
       </div>
     </div>

@@ -35,13 +35,12 @@ window.DRAKKAR_CONTENT = {
   trust: [
     ['10+ лет', 'опыта работы с ПВХ'],
     ['СПб + доставка', 'работаем по всей России'],
-    ['Skyline', 'собственное производство'],
-    ['Проверка', 'перед сдачей изделия']
+    ['Skyline', 'собственное производство']
   ],
 
   fleet: {
     title: 'Что производим',
-    intro: 'Лодки ПВХ, RIB и водные аттракционы — от готовых моделей до изделий под заказ.',
+    intro: 'Лодки Skyline, баллоны для RIB, водные аттракционы и изделия из ПВХ — для частных задач и бизнеса.',
     items: {
       sl300: {
         kicker: 'Собственная модель Skyline',
@@ -51,18 +50,25 @@ window.DRAKKAR_CONTENT = {
         alt: 'Лодка Skyline SL-300 на берегу моря'
       },
       rib: {
-        kicker: 'Жёсткий корпус',
-        title: 'RIB-корпус',
-        text: 'Изготавливаем и восстанавливаем элементы RIB под конкретную геометрию корпуса. Детали проекта и комплектацию согласуем перед работой.',
+        kicker: 'Для RIB',
+        title: 'Баллоны для RIB',
+        text: 'Изготавливаем и заменяем надувные баллоны для RIB по геометрии стеклопластикового корпуса. Размеры и конфигурацию согласуем под конкретное судно.',
         image: 'img/rib-winter1.webp',
-        alt: 'RIB-лодка с жёстким корпусом'
+        alt: 'Баллоны, установленные на RIB'
       },
       attraction: {
         kicker: 'Водные аттракционы',
         title: 'Аттракционы на заказ',
         text: 'Делаем водные конструкции из ПВХ под пляж, прокат или частный проект — по размерам, цвету и референсу клиента.',
         image: 'img/attraction-blue.webp',
-        alt: 'Водный аттракцион Skyline на море'
+        alt: 'Водный аттракцион из ПВХ на море'
+      },
+      mat: {
+        kicker: 'Изделия из ПВХ',
+        title: 'Маты для залов',
+        text: 'Изготавливаем покрышки и маты для борцовских и спортивных залов из ПВХ. Размер, плотность и конфигурацию подбираем под помещение и задачу.',
+        image: 'img/wrestling-mat.webp',
+        alt: 'Синий борцовский мат с белыми кругами в спортивном зале'
       }
     }
   },
@@ -80,7 +86,7 @@ window.DRAKKAR_CONTENT = {
     ],
     ctaTitle: 'Не нашли свою проблему?',
     ctaText: 'Отправьте фото лодки — подскажем, что с ней делать и сориентируем по стоимости.',
-    extra: 'Также выполняем ремонт RIB и катеров, байдарок и каяков, пробоин стеклопластиковых лодок с выездом к клиенту, надувного дна и SUP-досок, бронирование корпуса полиуретаном, работы с алюминиевыми пайолами, предпродажную и сезонную подготовку. Работаем с разными моделями лодок и катеров. Точную стоимость работ уточняйте по телефону.'
+    extra: 'Ремонтируем и обслуживаем лодки, катера, RIB, SUP и другие изделия из ПВХ. Помимо работ с ориентировочными ценами выше, выполняем диагностику, тюнинг, изготовление изделий и сезонную подготовку.'
   },
 
   production: {
@@ -107,10 +113,10 @@ window.DRAKKAR_CONTENT = {
         action: 'Получить комплектацию и срок доставки', status: 'В наличии / под заказ', image: 'img/hero-studio.webp', alt: 'Надувная лодка Skyline'
       },
       {
-        kicker: 'Жёсткий корпус', title: 'RIB — баллоны на стеклопластиковый корпус',
+        kicker: 'Баллоны для RIB', title: 'Баллоны по геометрии корпуса',
         text: 'Изготавливаем и заменяем баллоны повышенной плавучести точно под геометрию вашего корпуса.',
         points: ['Любые размеры и конфигурации', 'Согласование проекта до начала работ'],
-        action: 'Обсудить проект', status: 'Изготовление', image: 'img/rib-winter2.webp', alt: 'RIB-лодка с жёстким корпусом'
+        action: 'Обсудить проект', status: 'Изготовление', image: 'img/rib-winter2.webp', alt: 'Баллоны для RIB на стеклопластиковом корпусе'
       },
       {
         kicker: 'Водные аттракционы', title: 'Бананы, ватрушки, платформы',
@@ -136,10 +142,10 @@ window.DRAKKAR_CONTENT = {
 
   reviews: {
     title: 'Отзывы клиентов',
-    intro: 'Рейтинг и отзывы — с карточки услуг на Авито.',
-    rating: '4,8',
-    meta: 'из 5 · 19 отзывов на Авито',
-    text: 'Отзывы и оценки клиентов — в карточке мастерской на Авито. Перед заказом можно посмотреть реальные впечатления о работе.'
+    intro: 'Актуальные отзывы клиентов — в карточке мастерской на Авито.',
+    rating: '',
+    meta: 'Отзывы на Авито',
+    text: 'Откройте карточку мастерской, чтобы посмотреть актуальные оценки и отзывы клиентов.'
   },
 
   cta: {
@@ -207,7 +213,7 @@ window.DRAKKAR_CONTENT = {
   setText('.geo-band h2', c.geo.title); const geoPs=document.querySelectorAll('.geo-band > .wrap > div:first-child p'); if(geoPs[0]) geoPs[0].textContent=c.geo.text1; if(geoPs[1]) geoPs[1].textContent=c.geo.text2;
   document.querySelectorAll('.geo-list-item span').forEach((el,i)=>{if(c.geo.items[i])el.textContent=c.geo.items[i];});
 
-  setText('#reviews .section-head h2', c.reviews.title); setText('#reviews .section-head p', c.reviews.intro); setText('.rating-summary .num', c.reviews.rating); setText('.rating-summary .meta', c.reviews.meta); setText('.reviews-proof-main strong', c.reviews.rating + ' из 5'); setText('.reviews-proof-main span:last-child', '19 отзывов на Авито'); setText('.reviews-proof p', c.reviews.text);
+  setText('#reviews .section-head h2', c.reviews.title); setText('#reviews .section-head p', c.reviews.intro); setText('.reviews-proof p', c.reviews.text);
   setText('.cta-band h2', c.cta.title);
 
   const fc=document.querySelectorAll('.footer-col');
